@@ -1,8 +1,8 @@
 # Kubernetes: Basic
 
-[https://kubernetes.io/docs/concepts/overview/]
-
 ## What is Kubernetes (K8s)?
+
+[https://kubernetes.io/docs/concepts/overview/]
 
 Kubernetes is a portable, extensible, open source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. It has a large, rapidly growing ecosystem. Kubernetes services, support, and tools are widely available.
 
@@ -10,7 +10,9 @@ The name Kubernetes originates from Greek, meaning helmsman or pilot. K8s as an 
 
 ## Why use Kubernetes? What problem is it trying to solve?
 
-Applications deployment evolved over the year.
+[https://kubernetes.io/docs/concepts/overview/]
+
+Applications deployment evolved over the years:
 
 ![](https://d33wubrfki0l68.cloudfront.net/26a177ede4d7b032362289c6fccd448fc4a91174/eb693/images/docs/container_evolution.svg)
 
@@ -30,3 +32,33 @@ Kubernetes provides you with:
 - **Automatic bin packing:** You provide Kubernetes with a cluster of nodes that it can use to run containerized tasks. You tell Kubernetes how much CPU and memory (RAM) each container needs. Kubernetes can fit containers onto your nodes to make the best use of your resources.
 - **Self-healing:** Kubernetes restarts containers that fail, replaces containers, kills containers that don't respond to your user-defined health check, and doesn't advertise them to clients until they are ready to serve.
 - **Secret and configuration management:** Kubernetes lets you store and manage sensitive information, such as passwords, OAuth tokens, and SSH keys. You can deploy and update secrets and application configuration without rebuilding your container images, and without exposing secrets in your stack configuration.
+
+## Kubernetes Components
+
+[https://kubernetes.io/docs/concepts/overview/components/]
+
+A Kubernetes cluster consists:
+- The **control plane**: collection of multiple components responsible for managing the cluster itself. Control planes are usually run on dedicated _controller_ machine.
+- One or more **nodes**: machines where containers managed by the cluster run.
+
+## Control Plane Components
+
+A Kubernetes Control Plane consists of the following components:
+
+```mermaid
+flowchart LR
+    subgraph cp [Control Plane]
+    direction RL
+    api --> cloud
+    api --> scheduler
+    api --> controller
+    api -.-> etcd
+    cloud(cloud-controller-manager)
+    controller(kube-controller-manager)
+    scheduler(kube-scheduler)
+    api(kube-api-server)
+    etcd[(etcd)]
+    end
+
+    cloud <-.-> aws([fa:fa-cloud Cloud Provider])
+```
